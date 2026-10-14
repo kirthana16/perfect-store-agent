@@ -1,0 +1,28 @@
+question,expected,got,task_ok,answer_ok,retrieval_ok
+How many stores are perfect stores?,operational,operational,True,True,
+Which region has the lowest average on-shelf availability?,operational,operational,True,True,
+What percentage of stores hit their sales target?,operational,operational,True,True,
+Which 5 stores have the largest sales shortfall against target?,operational,operational,True,True,
+Which field rep has the most at-risk stores?,operational,operational,True,True,
+Which channel has the highest perfect store rate?,operational,operational,True,True,
+What is the most common weakest KPI among stores that missed their sales target?,operational,operational,True,True,
+How many perfect stores still missed their sales target?,operational,operational,True,True,
+How many stores were audited last month?,operational,operational,True,True,
+How many priority stores do we have?,operational,operational,True,True,
+What is the total sales gap across all stores?,operational,operational,True,True,
+Which retailer chain has the highest average perfect store score?,operational,operational,True,True,
+Which KPIs best predict whether a store hits its sales target?,target_prediction,target_prediction,True,,
+Can we predict which stores will miss their sales target?,target_prediction,target_prediction,True,,
+What natural groups of stores do we have based on their KPIs?,segmentation,segmentation,True,,
+Segment our stores so we can tailor field visits.,segmentation,segmentation,True,,
+Which stores have unusual KPI patterns that we should re-audit?,anomaly,anomaly,True,,
+Are there stores whose audit results look suspicious?,anomaly,anomaly,True,,
+What should we do to improve on-shelf availability in our weakest region?,advisory,advisory,True,,True
+How can we improve promo execution in the stores that missed target?,advisory,advisory,True,,True
+"Which stores should field reps visit first, and what should they fix?",advisory,advisory,True,,True
+Why do some perfect stores still miss their sales target and what can we do?,advisory,advisory,True,,True
+Which stores will decline in score next quarter?,unsupported,unsupported,True,,
+What is our profit margin?,unsupported,unsupported,True,,
+How much does each extra display cost us?,unsupported,unsupported,True,,
+What is the ROI of improving planogram compliance?,unsupported,unsupported,True,,
+Which competitor is gaining share in our stores?,unsupported,unsupported,True,,
