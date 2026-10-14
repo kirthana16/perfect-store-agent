@@ -1,0 +1,6 @@
+anthropic
+chromadb
+pandas
+numpy
+scikit-learn
+streamlit

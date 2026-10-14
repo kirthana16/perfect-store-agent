@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+.pytest_cache/
+kb_store/
+.env
+.streamlit/secrets.toml
+.DS_Store
+# Rebuilt automatically from data/perfect_store_enriched.csv on first use
+data/stores.db
+eval_results.csv
