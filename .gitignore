@@ -7,4 +7,4 @@ kb_store/
 .DS_Store
 # Rebuilt automatically from data/perfect_store_enriched.csv on first use
 data/stores.db
-eval_results.csv
+/eval_results.csv
