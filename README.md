@@ -11,6 +11,86 @@ A natural-language assistant for retail execution teams, built on a 2,000-store 
 
 **Live demo:** https://perfect-store-agent-at5q3m6wfzwtqtlngj7sps.streamlit.app/ · **Demo video:** _add GIF_
 
+## Workflow
+
+### 1. What happens when you ask a question
+
+```mermaid
+flowchart TD
+    Q["Your question"] --> UI["Streamlit app"]
+    UI --> AG["Agent: Claude tool loop, max 12 steps"]
+    AG --> RT{"What kind of question?"}
+
+    RT -->|Operational| O1["lookup_metric_definition<br/>glossary RAG"]
+    O1 --> O2["get_data_schema"]
+    O2 --> O3["query_stores<br/>read-only SQL"]
+    O3 --> O4["Answer + SQL + definition used"]
+
+    RT -->|Predictive| P1["profile_stores"]
+    P1 --> P2["retrieve_model_cards<br/>model-card RAG"]
+    P2 --> P3["Benchmark, segmentation<br/>or unusual-store scan"]
+    P3 --> P4["Model + evidence + risks"]
+
+    RT -->|Advisory| A1["query_stores<br/>find the evidence"]
+    A1 --> A2["retrieve_playbook<br/>playbook RAG"]
+    A2 --> A3["Actions tagged with playbook ids"]
+
+    RT -->|Unsupported| U1["Decline and explain<br/>what data is needed"]
+
+    O4 --> OUT["UI shows the answer, retrieved knowledge,<br/>SQL, charts and full trace"]
+    P4 --> OUT
+    A3 --> OUT
+    U1 --> OUT
+
+    classDef op fill:#E1F5EE,stroke:#0F6E56,color:#04342C
+    classDef ml fill:#FAECE7,stroke:#993C1D,color:#4A1B0C
+    classDef adv fill:#EEEDFE,stroke:#534AB7,color:#26215C
+    classDef no fill:#F1EFE8,stroke:#5F5E5A,color:#2C2C2A
+    class O1,O2,O3,O4 op
+    class P1,P2,P3,P4 ml
+    class A1,A2,A3 adv
+    class U1 no
+```
+
+### 2. How the project is built
+
+```mermaid
+flowchart TD
+    CSV["perfect_store_enriched.csv<br/>2,000 stores, 33 columns"] --> PREP["prepare_data.py<br/>builds the database on first use"]
+    PREP --> DB[("SQLite database<br/>stores table, read-only")]
+    KB["kb.py<br/>glossary, model cards, playbook"] --> CH[("ChromaDB<br/>3 vector collections")]
+
+    DB --> TOOLS["tools.py<br/>SQL, ML benchmarks, retrieval"]
+    CH --> TOOLS
+    TOOLS --> AGENT["agent.py<br/>Claude chooses which tool to run"]
+    AGENT --> APP["app.py<br/>Streamlit interface"]
+    AGENT --> EVAL["eval.py<br/>27 questions, gold SQL"]
+    TOOLS --> TESTS["tests/<br/>offline pytest checks"]
+
+    classDef data fill:#E1F5EE,stroke:#0F6E56,color:#04342C
+    classDef code fill:#EEEDFE,stroke:#534AB7,color:#26215C
+    classDef out fill:#F1EFE8,stroke:#5F5E5A,color:#2C2C2A
+    class CSV,DB,CH data
+    class PREP,KB,TOOLS,AGENT code
+    class APP,EVAL,TESTS out
+```
+
+### 3. From code change to live app
+
+```mermaid
+flowchart LR
+    DEV["Edit code<br/>and run locally"] --> COM["Commit in<br/>GitHub Desktop"]
+    COM --> PUSH["Push to<br/>GitHub main"]
+    PUSH --> CI["GitHub Actions<br/>runs pytest"]
+    PUSH --> DEP["Streamlit Community Cloud<br/>redeploys the app"]
+    CI -->|green tick| OK["Safe to rely on"]
+    CI -->|red cross| FIX["Read the error,<br/>fix and push again"]
+    FIX --> COM
+```
+
+
+
+
 ## Three RAG sources (all in `kb.py`)
 | Source | Size | Purpose |
 |---|---|---|
