@@ -1,6 +1,9 @@
 # Perfect Store Agent (Agentic RAG + Text-to-SQL + ML)
+# Business IDEA and Outcome 
+Using my experience in Retail Data : Synthesized Data to create a working RAG based Agent to not only answer operational questions ,based on Natural Language
+choose a ML tool to predict sales and segmenation
 
-A natural-language assistant for retail execution teams, built on a 2,000-store Perfect Store audit. Ask a question and an agent built on Claude decides how to answer it, then shows its work.
+This is a simplified natural-language assistant for retail execution teams, built on a 2,000-store Perfect Store audit. Ask a question and an agent built on Claude decides how to answer it, then shows its work.
 
 | Question type | Example | What the agent does |
 |---|---|---|
